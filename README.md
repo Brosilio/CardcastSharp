@@ -7,6 +7,11 @@ If you're lazy and don't want to bother reading the docs, head over to the [rele
 ## Getting Started
 The Cardcast API is simple by nature. This wrapper is equally simple.
 
+Don't forget to
+```csharp
+using CardcastSharp;
+```
+
 To get a deck:
 ```csharp
 Deck d = await Cardcast.GetDeck(Console.ReadLine(), OnGetDeckError);
