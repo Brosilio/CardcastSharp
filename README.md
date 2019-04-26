@@ -14,7 +14,7 @@ using CardcastSharp;
 
 To get a deck:
 ```csharp
-Deck d = await Cardcast.GetDeck(Console.ReadLine(), OnGetDeckError);
+Deck d = await Cardcast.GetDeck("4KU68", OnGetDeckError);
 if(d != null)
 {
 	// Do stuff
@@ -30,7 +30,7 @@ Passing a callback to the GetDeck() function allows some shit to be done if some
 Getting the cards in the deck:
 ```csharp
 
-Deck d = await Cardcast.GetDeck(Console.ReadLine(), OnGetDeckError);
+Deck d = await Cardcast.GetDeck("4KU68", OnGetDeckError);
 if(d != null)
 {
 	foreach(Card c in d.Calls)
