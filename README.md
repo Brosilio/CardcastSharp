@@ -2,7 +2,7 @@
 CardcastSharp is a C# api wrapper for the Cardcastgame.com API.
 
 ## Releases
-If you're lazy and don't want to bother reading the docs, head over to the [####releases](https://github.com/Brosilio/CardcastSharp/releases) page.
+If you're lazy and don't want to bother reading the docs, head over to the [releases](https://github.com/Brosilio/CardcastSharp/releases) page.
 
 ## Getting Started
 The Cardcast API is simple by nature. This wrapper is equally simple.
