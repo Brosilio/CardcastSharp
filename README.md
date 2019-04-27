@@ -45,6 +45,26 @@ if(d != null)
 }
 ```
 
+Getting information for a deck:
+
+```csharp
+Deck d = await Cardcast.GetDeck("4KU68", OnGetDeckError);
+if(d != null)
+{
+	d.Info // Contains lots of information about the deck
+}
+
+
+// Alternate method
+
+DeckInfo di = await Cardcast.GetDeckInfo("4KU68", OnGetDeckError);
+if(di != null)
+{
+	di.Author // Lots of properties in here
+}
+
+```
+
 ## License
 Just don't be a dick.
 

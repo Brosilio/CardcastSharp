@@ -37,7 +37,9 @@ namespace CardcastSharp
             try
             {
                 string deckJson = await webClient.DownloadStringTaskAsync($"{API_ENDPOINT}{code}{API_CARDS}");
-                return JsonConvert.DeserializeObject<Deck>(deckJson);
+                Deck temp = JsonConvert.DeserializeObject<Deck>(deckJson);
+                temp.Info = await GetDeckInformation(code, onErrorCallback);
+                return temp;
             }
             catch(Exception ex)
             {
@@ -46,10 +48,23 @@ namespace CardcastSharp
             }
         }
 
-        public static async Task<DeckInfo> GetDeckInformation(string code)
+        /// <summary>
+        /// Returns all the information about a deck.
+        /// </summary>
+        /// <param name="code">The playcode of the deck.</param>
+        /// <returns>Returns the deck info. Returns null if it couldn't be found.</returns>
+        public static async Task<DeckInfo> GetDeckInformation(string code, Action<Exception> onErrorCallback = null)
         {
-            string deckInfoJson = await webClient.DownloadStringTaskAsync($"{API_ENDPOINT}{code}");
-            return JsonConvert.DeserializeObject<DeckInfo>(deckInfoJson);
+            try
+            {
+                string deckInfoJson = await webClient.DownloadStringTaskAsync($"{API_ENDPOINT}{code}");
+                return JsonConvert.DeserializeObject<DeckInfo>(deckInfoJson);
+            }
+            catch (Exception ex)
+            {
+                onErrorCallback?.Invoke(ex);
+                return null;
+            }
         }
     }
 
@@ -162,6 +177,12 @@ namespace CardcastSharp
     /// </summary>
     public class Deck
     {
+        /// <summary>
+        /// All the information about this deck.
+        /// </summary>
+        [JsonIgnore]
+        public DeckInfo Info { get; set; }
+
         /// <summary>
         /// All the calls (black cards) in this deck
         /// </summary>
